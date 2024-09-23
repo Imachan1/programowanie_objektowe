@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public class Person
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public Person(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+}
+
+public class Author : Person
+{
+    public List<Book> Booklist { get; set; }
+    public Author(string firstName, string lastName):base(firstName, lastName) 
+    {
+        Booklist = new List<Book>();
+    }
+
+    public void AddBook(Book book)
+    {
+        Booklist.Add(book);
+    }
+}
+public class Reader : Person
+{
+    public List<Book> BorrowedBookList { get; set; }
+    public Reader(string firstName, string lastName) :base (firstName,lastName)
+    {
+        BorrowedBookList = new List<Book>();
+    }
+    public void AddBook(Book book)
+    {
+        BorrowedBookList.Add(book);
+        Console.WriteLine($"Czytelnik {FirstName}  {LastName} wypozycza ksiązke {book}");
+    }
+}
+
+public class Book
+{
+    public string Title { get; set; }
+    public Author Author { get; set; }
+    public int PublicationYear {  get; set; }
+
+    public Book(string title, Author author, int publicationYear)
+    {
+        Title = title;
+        Author = author;
+        PublicationYear = publicationYear;
+    }
+}
+
+public class Library
+{
+    public List<Book> LibraryBookList { get; set;}
+    public List<Reader> LibraryReaderList { get; set;}
+
+    public Library()
+    {
+        LibraryBookList= new List<Book>();
+        LibraryReaderList= new List<Reader>();
+    }
+
+    public void AddBook(Book book)
+    {
+        LibraryBookList.Add(book);
+    }
+
+    public void AddReaders(Reader reader)
+    {
+        LibraryReaderList.Add(reader);
+    }
+    public void BorrowBook(Reader reader, Book book)
+    {
+        //wypozyczenie książki przez czytelnika
+    }
+}
+
+
+namespace Projekt
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Author author = new Author("Adam", "Mickiewicz");
+            Book book = new Book("Pan Tadeusz", author,1834);
+            Console.ReadKey();
+        }
+    }
+}
