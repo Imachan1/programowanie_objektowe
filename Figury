@@ -90,7 +90,7 @@ namespace praca
             private float c;
             private float d;
 
-            public void SetTrapezoid(float strona1,float strona2,float strona3, float strona4)
+            public void SetTrapezoid(float strona1, float strona2, float strona3, float strona4)
             {
                 a = strona1;
                 b = strona2;
@@ -107,6 +107,24 @@ namespace praca
                 return (float)(a + b + c + d);
             }
         }
+        public class Ball:Shape
+        {
+            private float r;
+
+            public void SetBall(float promien)
+            {
+                r = promien;
+            }
+
+            public override float CalculateArea()
+            {
+                return (float)((4 / 3) * Math.PI * Math.Pow(r,3));
+            }
+            public override float CalculatePerimeter()
+            {
+                return (float)(2*Math.PI*r);
+            }
+        }
         static void Main(string[] args)
         {
             while (true)
@@ -115,8 +133,8 @@ namespace praca
                 Console.WriteLine("2.Kolo");
                 Console.WriteLine("3.Trójkąt");
                 Console.WriteLine("4.Trapez");
-                //Console.WriteLine("5.Kula");
-                Console.WriteLine("5.Wyjście");
+                Console.WriteLine("5.Kula");
+                Console.WriteLine("6.Wyjście");
                 Console.WriteLine("Wybierz ksztalt do obliczenia");
 
                 int choise = int.Parse(Console.ReadLine());
@@ -165,11 +183,19 @@ namespace praca
                         float TrapezC = float.Parse(Console.ReadLine());
                         Console.WriteLine("Podaj strone d (bok 2): ");
                         float TrapezD = float.Parse(Console.ReadLine());
-                        trapez.SetTrapezoid(TrapezA,TrapezB,TrapezC,TrapezD);
+                        trapez.SetTrapezoid(TrapezA, TrapezB, TrapezC, TrapezD);
                         Console.WriteLine("Obwód prostokata: {0}", trapez.CalculatePerimeter());
                         Console.WriteLine("Powierzchnia prostokata: {0}", trapez.CalculateArea());
                         break;
                     case 5:
+                        Ball bA = new Ball();
+                        Console.WriteLine("Podaj promien(r): ");
+                        float BallPromien = float.Parse(Console.ReadLine());
+                        bA.SetBall(BallPromien);
+                        Console.WriteLine("Obwód kuli: {0}", bA.CalculatePerimeter());
+                        Console.WriteLine("Objętosc kuli: {0}", bA.CalculateArea());
+                        break;
+                    case 6:
                         return;
                     default:
                         Console.WriteLine("Nieprawidlowy wybór");
