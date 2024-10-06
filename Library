@@ -18,7 +18,7 @@ public class Person
 public class Author : Person
 {
     public List<Book> Booklist { get; set; }
-    public Author(string firstName, string lastName):base(firstName, lastName) 
+    public Author(string firstName, string lastName) : base(firstName, lastName)
     {
         Booklist = new List<Book>();
     }
@@ -31,7 +31,7 @@ public class Author : Person
 public class Reader : Person
 {
     public List<Book> BorrowedBookList { get; set; }
-    public Reader(string firstName, string lastName) :base (firstName,lastName)
+    public Reader(string firstName, string lastName) : base(firstName, lastName)
     {
         BorrowedBookList = new List<Book>();
     }
@@ -46,7 +46,7 @@ public class Book
 {
     public string Title { get; set; }
     public Author Author { get; set; }
-    public int PublicationYear {  get; set; }
+    public int PublicationYear { get; set; }
 
     public Book(string title, Author author, int publicationYear)
     {
@@ -58,13 +58,13 @@ public class Book
 
 public class Library
 {
-    public List<Book> LibraryBookList { get; set;}
-    public List<Reader> LibraryReaderList { get; set;}
+    public List<Book> LibraryBookList { get; set; }
+    public List<Reader> LibraryReaderList { get; set; }
 
     public Library()
     {
-        LibraryBookList= new List<Book>();
-        LibraryReaderList= new List<Reader>();
+        LibraryBookList = new List<Book>();
+        LibraryReaderList = new List<Reader>();
     }
 
     public void AddBook(Book book)
@@ -78,7 +78,7 @@ public class Library
     }
     public void BorrowBook(Reader reader, Book book)
     {
-        //wypozyczenie książki przez czytelnika
+         reader.AddBook(book);
     }
 }
 
@@ -90,7 +90,7 @@ namespace Projekt
         static void Main(string[] args)
         {
             Author author = new Author("Adam", "Mickiewicz");
-            Book book = new Book("Pan Tadeusz", author,1834);
+            Book book = new Book("Pan Tadeusz", author, 1834);
             Console.ReadKey();
         }
     }
