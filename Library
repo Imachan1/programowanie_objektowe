@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,28 +18,14 @@ public class Person
 
 public class Author : Person
 {
-    public List<Book> Booklist { get; set; }
+    public List<Book> BookList { get; set; }
     public Author(string firstName, string lastName) : base(firstName, lastName)
     {
-        Booklist = new List<Book>();
-    }
-
-    public void AddBook(Book book)
-    {
-        Booklist.Add(book);
-    }
-}
-public class Reader : Person
-{
-    public List<Book> BorrowedBookList { get; set; }
-    public Reader(string firstName, string lastName) : base(firstName, lastName)
-    {
-        BorrowedBookList = new List<Book>();
+        BookList = new List<Book>();
     }
     public void AddBook(Book book)
     {
-        BorrowedBookList.Add(book);
-        Console.WriteLine($"Czytelnik {FirstName}  {LastName} wypozycza ksiązke {book}");
+        BookList.Add(book);
     }
 }
 
@@ -47,7 +34,6 @@ public class Book
     public string Title { get; set; }
     public Author Author { get; set; }
     public int PublicationYear { get; set; }
-
     public Book(string title, Author author, int publicationYear)
     {
         Title = title;
@@ -55,72 +41,115 @@ public class Book
         PublicationYear = publicationYear;
     }
 }
+public class Reader : Person
+{
+    public List<Book> BorrowedBooksList { get; set; }
+    public Reader(string firstName, string lastName) : base(firstName, lastName)
+    {
+        BorrowedBooksList = new List<Book>();
+    }
+    public void BorrowBook(Book book)
+    {
+        BorrowedBooksList.Add(book);
+        Console.WriteLine($"Czytelnik {FirstName} {LastName} wyporzyczył książkę: {book.Title}");
+    }
+}
 
 public class Library
 {
-    public List<Book> LibraryBookList { get; set; }
-    public List<Reader> LibraryReaderList { get; set; }
-
+    public List<Book> BooksList { get; set; }
+    public List<Author> AuthorsList { get; set; }
+    public List<Reader> ReadersList { get; set; }
     public Library()
     {
-        LibraryBookList = new List<Book>();
-        LibraryReaderList = new List<Reader>();
+        BooksList = new List<Book>();
+        ReadersList = new List<Reader>();
+        AuthorsList = new List<Author>();
     }
 
     public void AddBook(Book book)
     {
-        LibraryBookList.Add(book);
+        BooksList.Add(book);
     }
-
-    public void AddReaders(Reader reader)
+    public void AddReader(Reader reader)
     {
-        LibraryReaderList.Add(reader);
+        ReadersList.Add(reader);
+    }
+    public void AddAuthor(Author author)
+    {
+        AuthorsList.Add(author);
     }
     public void BorrowBook(Reader reader, Book book)
     {
-         reader.AddBook(book);
+        if (BooksList.Contains(book))
+        {
+            reader.BorrowBook(book);
+            BooksList.Remove(book);
+        }
+        else
+        {
+            Console.WriteLine("Książka nie jest dostępna w bibliotece.");
+        }
     }
+    public void DisplayBooks()
+    {
+        Console.WriteLine("Książki dostępne w bibliotece:");
+        foreach (var book in BooksList)
+        {
+            Console.WriteLine($"{book.Title} - {book.Author.FirstName} {book.Author.LastName}");
+
+        }
+    }
+    public void DisplayAuthors()
+    {
+        Console.WriteLine("Autorzy w bibliotece:");
+        foreach (var author in AuthorsList)
+        {
+            Console.WriteLine($"{author.FirstName} {author.LastName}");
+
+        }
+    }
+    public void DisplayBorrowedBooks(Reader reader)
+    {
+        Console.WriteLine("Książki wypożyczone w bibliotece:");
+        foreach (var book in reader.BorrowedBooksList)
+        {
+            Console.WriteLine($"{book.Title} - {book.Author.FirstName} {book.Author.LastName} ({book.PublicationYear}) wypożyczona przez {reader.FirstName} {reader.LastName}");
+
+        }
+    }
+
+    // Dodać metodę wyświetlająca wszystkich autorów w formie tabeli
 }
 
-
-namespace Projekt
+namespace System_Zarzadzania_Biblioteka
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Author author = new Author("Adam", "Mickiewicz");
-            Book book = new Book("Pan Tadeusz", author, 1834);
-            Console.ReadKey();
+            Author author1 = new Author("Adam", "Mickiewicz");
+            Author author2 = new Author("Henryk", "Sienkiewicz");
+
+            Book book1 = new Book("Pan Tadeusz", author1, 1834);
+            Book book2 = new Book("Quo Vadis", author2, 1896);
+
+            author1.AddBook(book1);
+            author1.AddBook(book2);
+
+            Library library = new Library();
+            library.AddAuthor(author1);
+            library.AddAuthor(author2);
+            library.AddBook(book1);
+            library.AddBook(book2);
+
+            Reader reader1 = new Reader("Jan", "Kowalski");
+            Reader reader2 = new Reader("Anna", "Nowak");
+
+            library.AddReader(reader1);
+            library.AddReader(reader2);
+
+            // Wyświetlenie menu
         }
     }
 }
-/*
-Temat zadania: System Zarządzania Biblioteką
-Opis zadania:
-Stwórz aplikację konsolową w języku C#, która będzie symulować system zarządzania biblioteką. Aplikacja powinna umożliwiać zarządzanie książkami, autorami oraz wypożyczeniami. W projekcie należy wykorzystać dziedziczenie, konstruktory oraz kompozycję.
-Wymagania funkcjonalne:
-1.	Klasa Person:
-o	Pola: FirstName, LastName.
-o	Konstruktor: inicjalizujący pola FirstName i LastName.
-2.	Klasa Author (dziedziczy po klasie Person):
-o	Pola: BooksList (lista książek napisanych przez autora).
-o	Konstruktor: inicjalizujący pola FirstName, LastName oraz pustą listę książek.
-o	Metoda: AddBook(Book book) - dodaje książkę do listy książek autora.
-3.	Klasa Book:
-o	Pola: Title, Author (obiekt klasy Author), PublicationYear.
-o	Konstruktor: inicjalizujący pola Title, Author, PublicationYear.
-4.	Klasa Reader (dziedziczy po klasie Person):
-o	Pola: BorrowedBooksList (lista wypożyczonych książek).
-o	Konstruktor: inicjalizujący pola FirstName, LastName oraz pustą listę wypożyczeń.
-o	Metoda: BorrowBook(Book book) - dodaje książkę do listy wypożyczeń.
-5.	Klasa Library:
-o	Pola: BooksList (lista wszystkich książek w bibliotece), ReadersList (lista czytelników).
-o	Konstruktor: inicjalizujący pustą listę książek i czytelników.
-o	Metody:
-	AddBook(Book book) - dodaje książkę do listy książek.
-	AddReader(Reader reader) - dodaje czytelnika do listy czytelników.
-	BorrowBook(Reader reader, Book book) - umożliwia wypożyczenie książki przez czytelnika.
-
-
-*/
