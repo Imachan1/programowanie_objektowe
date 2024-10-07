@@ -150,6 +150,13 @@ namespace System_Zarzadzania_Biblioteka
             library.AddReader(reader2);
 
             // Wyświetlenie menu
+
+
+            bool exit=false;
+            while (!exit)
+            {
+
+            }
         }
     }
 }
