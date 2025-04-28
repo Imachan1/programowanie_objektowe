@@ -1,0 +1,4 @@
+dotnet new console -n "Nazwa pliku"
+dotnet run
+new xunit -n "xyz"
+dotnet add reference ../ ____ / ____
