@@ -1,0 +1,14 @@
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\bin\Debug\net9.0\CalculatorApp.exe
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\bin\Debug\net9.0\CalculatorApp.deps.json
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\bin\Debug\net9.0\CalculatorApp.runtimeconfig.json
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\bin\Debug\net9.0\CalculatorApp.dll
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\bin\Debug\net9.0\CalculatorApp.pdb
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.AssemblyInfoInputs.cache
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.AssemblyInfo.cs
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.csproj.CoreCompileInputs.cache
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.dll
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\refint\CalculatorApp.dll
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.pdb
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\CalculatorApp.genruntimeconfig.cache
+C:\Users\egzamin\Desktop\testowanie_1\CalculatorApp\obj\Debug\net9.0\ref\CalculatorApp.dll
