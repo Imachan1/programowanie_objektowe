@@ -1,10 +1,23 @@
-﻿namespace CalculatorApp.Test;
+using CalculatorApp;
+using Xunit;
+//using Xunit;
 
-public class UnitTest1
+namespace CalculatorApp.Test;
+
+public class CalculatorTest
 {
-    [Fact]
-    public void Test1()
+    [Fact]//USING XUNIT !!!
+    public void Add_ShouldReturnCorrectSum()
     {
+        // arrange
+        var calculator = new Calculator();
 
+
+        // act
+        int result = calculator.Add(3, 5);
+
+
+        //assert
+        Assert.Equal(8, result);
     }
 }
